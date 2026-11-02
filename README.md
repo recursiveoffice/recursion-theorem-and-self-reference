@@ -669,7 +669,7 @@ h(\langle i,x\rangle,s)=\begin{cases}
 \end{cases}
 $$
 
-容易发现 $\chi_H(\langle i,x\rangle)=\lim_{s\to\infty} h(\langle i,x\rangle,s)$，而且令 $H_s=\{\langle i,x\rangle:\varphi_{i,s}(x)\downarrow\}$ 可以发现 $H_0\subset H_1\subset H_2\subset \ldots$
+容易发现 $\chi_H(\langle i,x\rangle)=\lim_{s\to\infty} h(\langle i,x\rangle,s)$，而且令 $H_s=\lbrace\langle i,x\rangle:\varphi_{i,s}(x)\downarrow\rbrace$ 可以发现 $H_0\subset H_1\subset H_2\subset \ldots$
 
 我们可以给所有递归可枚举集编号。记 $W_e$ 为第 $e$ 个程序的定义域：
 
