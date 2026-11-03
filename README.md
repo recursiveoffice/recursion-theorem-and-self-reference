@@ -892,7 +892,7 @@ $$
 A\le_m B.
 $$
 
-它的意思是：我们不需要反复查询 $B$，只需要先把输入 $x$ 转换成 $f(x)$，再判断转换后的结果是否属于 $B$。所谓对一归约是指 $f$ 可以将多个不同的输入映射为相同的输出。
+它的意思是：我们不需要反复查询 $B$，只需要先把输入 $x$ 转换成 $f(x)$，再判断转换后的结果是否属于 $B$。所谓对多一归约，是指 $f$ 不一定是单射——它可以选择将多个不同的输入映射为相同的输出。
 
 图灵归约和多一归约并不相同。多一归约一定可以转化为图灵归约，因为只需计算 $f(x)$，再向 $B$ 的谕示查询一次即可。但反过来不成立。
 
@@ -984,14 +984,14 @@ x\lt s\land
 \exists z\le s\ 
 [
 \forall y\le x,
-\Phi_{e,s}^{B_s\upharpoonright z}(y)\downarrow
+\Phi_{e,s}^{B_s\upharpoonright z,z}(y)\downarrow
 \wedge
 B\upharpoonright z=B_s\upharpoonright z
 ]
 \rbrace.
 $$
 
-这里，$`\Phi_{e,s}^{B_s\upharpoonright z}(y)\downarrow`$ 表示在至多 $s$ 步内，利用 $B_s\upharpoonright z$ 作为有限谕示完成计算。$`\mu s`$ 表示取满足条件的最小自然数。
+这里，$`\Phi_{e,s}^{B_s\upharpoonright z,z}(y)\downarrow`$ 表示在至多 $s$ 步内，利用 $B_s\upharpoonright z$ 作为有限谕示完成计算，且查询的位置不超过 $z$。$`\mu s`$ 表示取满足条件的最小自然数。
 
 首先，为什么 $m(x)$ 一定存在？因为对于每个 $y\le x$，真实计算 $\Phi_e^B(y)$ 都会停机，而且每次计算只涉及有限多个谕示查询。由于这样的 $y$ 只有有限多个，我们可以找到一个足够大的 $z$，覆盖这些计算中出现的所有查询位置。再取足够大的阶段 $s$，使得 $B_s\upharpoonright z=B\upharpoonright z$，并且所有计算都能在 $s$ 步内完成。同时要求 $x<s$ 和 $z\le s$，上述条件就全部满足了。
 
