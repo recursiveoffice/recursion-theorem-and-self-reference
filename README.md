@@ -661,7 +661,9 @@ $$
 
 一个集合 $A$ 是**递归可枚举集 (recursively enumerable set / computably enumerable set)** 或**半可判定集 (semi-decidable set)**，如果存在一个可计算偏函数，其定义域恰好是 $A$；即存在一个程序，它在输入属于 $A$ 时停机，在输入不属于 $A$ 时则永远运行。
 
-非空递归可枚举集也可以看成是某个可计算全函数的值域。我们之前提过的停机问题 $H=\lbrace\langle i,x\rangle:\varphi_i(x)\downarrow\rbrace$ 尽管不可判定，但它是一个递归可枚举集合，因为凡是停机的“程序-输入”对都可以在有限时间内枚举出来：用 $\varphi_{i,s}(x)\downarrow$ 表示第 $i$ 个程序在输入 $x$ 上在 **$s$ 步之内**停机，定义可计算函数
+一个集合是非空递归可枚举集，当且仅当它是某个可计算全函数的值域。_TODO_
+
+我们之前提过的停机问题 $H=\lbrace\langle i,x\rangle:\varphi_i(x)\downarrow\rbrace$ 尽管不可判定，但它是一个递归可枚举集合，因为凡是停机的“程序-输入”对都可以在有限时间内枚举出来：用 $\varphi_{i,s}(x)\downarrow$ 表示第 $i$ 个程序在输入 $x$ 上在 **$s$ 步之内**停机，定义可计算函数
 
 $$
 h(\langle i,x\rangle,s)=\begin{cases}
@@ -677,6 +679,17 @@ $$
 $$
 W_e=\lbrace x:\varphi_e(x)\downarrow\rbrace.
 $$
+
+对于任何递归可枚举集 $W_e$，定义可计算函数
+
+$$
+f_e(x,s)=\begin{cases}
+1,\text{ if }\varphi_{e,s}(x)\downarrow\\
+0,\text{ otherwise}
+\end{cases}
+$$
+
+则有 $\chi_{W_e}(x)=\lim_{s\to\infty} f_e(x,s)$。若定义 $W_{e,s}=\lbrace x:f_e(x,s)=1\rbrace$ 则有 $W_e=\bigcup_{s=0}^\infty W_{e,s}$ 且 $W_{e,0}\subset W_{e,1}\subset W_{e,2}\subset \ldots$
 
 如果一个集合 $A$ 和它的补集 $A^c$ 都是递归可枚举的，那么 $A$ 就是可计算的：对于任意 $x$，交替枚举 $A$ 和 $A^c$ 直到一方出现 $x$，就可以判定 $x$ 是否在 $A$ 中。
 
@@ -862,7 +875,7 @@ $$
 
 这个结论有一个很直观的解释：你无法自动地将一个程序的不停机情况修补为停机并报错，即使原本停机的部分（定义域）是可计算集合。
 
-## 13. 相对可计算性：图灵归约
+## 13. 相对可计算性：图灵归约与多一归约
 
 如果允许程序在计算过程中访问外部信息，它的计算能力会发生什么变化？这就引出了相对可计算性理论，以及几种常见的归约方式。
 
@@ -920,14 +933,9 @@ $$
 
 那么，对任意 $e$，我们同时运行两个程序：一个计算 $\varphi_e(e)$，另一个计算 $\varphi_{f(e)}(f(e))$。根据上面的等价关系，二者必有且仅有一个停机。因此，只需等待其中一个停机，就能判断 $e$ 是否属于 $K$：第一个停机则回答属于，第二个停机则回答不属于。这样就得到了停机问题的判定算法，与停机问题不可判定矛盾。
 
-接下来介绍一个与图灵归约密切相关的概念：**一致可计算集列 (uniformly computable sequence of sets)**。
+## 14. 递归可枚举集的推广：极限可计算集、极限引理、收敛模引理
 
-对于一个集合 $X$，记它在 $n$ 以内的部分为
-
-$$
-X\upharpoonright n
-=X\cap\lbrace i:i\le n\rbrace.
-$$
+在第 9 章中我们看到，任意递归可枚举集 $W_e$ 可以表示成递增的、可计算集列的并 $\bigcup_{s=0}^\infty W_{e,s}$。换句话说，在 $W_{e,0},W_{e,1},W_{e,2},\ldots$ 向 $W_e$ 的逼近过程中，我们只允许更多元素加进来，却不允许已有的元素被剔除。如果放宽要求，允许在逼近过程中增加和剔除元素，但任意元素最终是否归属集合必须稳定下来，则得到了**极限可计算集**。
 
 设 $\lbrace A_s\rbrace_{s\in\mathbb{N}}$ 是一列集合。如果存在一个可计算函数 $f(x,s)$，使得
 
@@ -935,7 +943,20 @@ $$
 f(x,s)=\chi_{A_s}(x),
 $$
 
-我们就称 $\lbrace A_s\rbrace$ 是一个一致可计算集列。进一步，如果存在一个函数 $m$，使得
+我们就称 $\lbrace A_s\rbrace$ 是一个**一致可计算集列 (uniformly computable sequence of sets)**。如果 $A=\lim_{s\to\infty} A_s$ 则称 $A$ 为一个极限可计算集。
+
+可以证明，一个集合 $A$ 是极限可计算集当且仅当 $A\leq_T K$。
+
+_TODO_
+
+对于收敛的一致可计算集列，对于一个集合 $X$，记它在 $n$ 以内的部分为
+
+$$
+X\upharpoonright n
+=X\cap\lbrace i:i\le n\rbrace.
+$$
+
+对于一个一致可计算集列 $\lbrace A_s\rbrace_{s\in\mathbb{N}}$，如果存在一个函数 $m$，使得
 
 $$
 \forall x,\forall s\ge m(x),\quad A_s\upharpoonright x=A\upharpoonright x,
@@ -1007,9 +1028,10 @@ $$
 
 另一方面，对于每个 $y\le x$，阶段 $s$ 的模拟计算已经停机，而且只查询不超过 $z$ 的位置。因此，任何后续阶段 $t\ge s$ 使用的谕示都不会改变这次计算所得到的答案。于是，所有 $y\le x$ 的计算结果在阶段 $s$ 之后都保持不变，收敛模引理得证。
 
-## 14. 不动点的消失：Arslanov 完备性准则
-## 15. 跨界应用（1）：Blum 公理系和抽象复杂性理论
-## 16. 跨界应用（2）：P/NP 的相对化障碍与独立相对化
+## 15. 不动点的消失（1）：两种无不动点函数
+## 16. 不动点的消失（2）：Arslanov 完备性准则
+## 17. 跨界应用（1）：Blum 公理系和抽象复杂性理论
+## 18. 跨界应用（2）：P/NP 的相对化障碍与独立相对化
 
 ## 参考文献
 
