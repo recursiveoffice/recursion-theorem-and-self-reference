@@ -951,6 +951,8 @@ $$
 K^c=\lbrace e:\varphi_e(e)\uparrow\rbrace.
 $$
 
+对角线停机问题与之前我们提到的停机问题可以互相多一归约，因此它们都是不可判定的。
+
 显然 $K$ 可以图灵归约到 $K^c$：只需要查询 $e$ 是否属于 $K^c$，再把答案取反即可。
 
 但 $K$ 不能多一归约到 $K^c$。反设存在可计算全函数 $f$，满足
@@ -959,7 +961,7 @@ $$
 e\in K\iff f(e)\in K^c.
 $$
 
-那么，对任意 $e$，我们同时运行两个程序：一个计算 $\varphi_e(e)$，另一个计算 $\varphi_{f(e)}(f(e))$。根据上面的等价关系，二者必有且仅有一个停机。因此，只需等待其中一个停机，就能判断 $e$ 是否属于 $K$：第一个停机则回答属于，第二个停机则回答不属于。这样就得到了停机问题的判定算法，与停机问题不可判定矛盾。
+那么，对任意 $e$，我们同时运行两个程序：一个计算 $\varphi_e(e)$，另一个计算 $\varphi_{f(e)}(f(e))$。根据上面的等价关系，二者必有且仅有一个停机。因此，只需等待其中一个停机，就能判断 $e$ 是否属于 $K$：第一个停机则回答属于，第二个停机则回答不属于。这样就得到了对角线停机问题的判定算法，与其不可判定性矛盾。
 
 ## 14. 递归可枚举集的推广：极限可计算集、极限引理、收敛模引理
 
@@ -973,11 +975,33 @@ $$
 
 我们就称 $\lbrace A_s\rbrace$ 是一个**一致可计算集列 (uniformly computable sequence of sets)**。如果 $A=\lim_{s\to\infty} A_s$ 则称 $A$ 为一个极限可计算集。
 
-可以证明，一个集合 $A$ 是极限可计算集当且仅当 $A\leq_T K$。
+可以证明，一个集合 $A$ 是极限可计算集当且仅当 $A\leq_T K$，其中 $K$ 是对角线停机问题。
 
-_TODO_
+设 $\chi_A(x)=\lim_s f(x,s)$，若想确定 $\chi_A(x)$ 的值，只需依次询问如下 $e(x,s)$ 是否属于 $K$：
 
-对于一个一致可计算集列 $\lbrace A_s\rbrace_{s\in\mathbb{N}}$，如果存在一个函数 $m$，使得
+$$
+\varphi_{e(x,s)}(y)=\begin{cases}
+1,\text{ if }\exists t>s,f(x,t)\ne f(x,s)\\
+\uparrow,\text{ otherwise }
+\end{cases}.
+$$
+
+可以看出，$`e(x,s)`$ 属于 $K$ 当且仅当 $f(x,s)$ 还没有收敛，而已知 $f$ 必然收敛，所以依次询问 $e(x,0), e(x,1), \ldots$ 必然能遇到收敛的时候，于是可以获得 $\chi_A(x)$ 的值。
+
+反过来，设 $\chi_A=\Phi_e^K$，令 $K=\cup_s K_s$ 为逼近该递归可枚举集的一致可计算集列，定义
+
+$$
+f(x,s)=\begin{cases}
+y,\text{ if }\Phi_{e,s}^{K_s}\downarrow =y\\
+0,\text{ otherwise}
+\end{cases}.
+$$
+
+由于 $\chi_A=\Phi_e^K$，上式第一个条件在足够大的 $s$ 下必然成立，因此 $\chi_A(x)=\lim_s f(x,s)$。
+
+这就证明了**极限引理 (limit lemma)** 的一种形式。
+
+下面我们考虑收敛速度的问题。对于一个一致可计算集列 $\lbrace A_s\rbrace_{s\in\mathbb{N}}$，如果存在一个函数 $m$，使得
 
 $$
 \forall x,\forall s\ge m(x),\quad A_s\upharpoonright x=A\upharpoonright x,
