@@ -671,26 +671,13 @@ $$
 
 一个集合 $A$ 是**递归可枚举集 (recursively enumerable set / computably enumerable set)** 或**半可判定集 (semi-decidable set)**，如果存在一个可计算偏函数，其定义域恰好是 $A$；即存在一个程序，它在输入属于 $A$ 时停机，在输入不属于 $A$ 时则永远运行。
 
-一个集合是非空递归可枚举集，当且仅当它是某个可计算全函数的值域。_TODO_
-
-我们之前提过的停机问题 $H=\lbrace\langle i,x\rangle:\varphi_i(x)\downarrow\rbrace$ 尽管不可判定，但它是一个递归可枚举集合，因为凡是停机的“程序-输入”对都可以在有限时间内枚举出来：用 $\varphi_{i,s}(x)\downarrow$ 表示第 $i$ 个程序在输入 $x$ 上在 **$s$ 步之内**停机，定义可计算函数
-
-$$
-h(\langle i,x\rangle,s)=\begin{cases}
-1,\text{ if }\varphi_{i,s}(x)\downarrow\\
-0,\text{ otherwise}
-\end{cases}
-$$
-
-容易发现 $\chi_H(\langle i,x\rangle)=\lim_{s\to\infty} h(\langle i,x\rangle,s)$，而且令 $H_s=\lbrace\langle i,x\rangle:\varphi_{i,s}(x)\downarrow\rbrace$ 可以发现 $H_0\subset H_1\subset H_2\subset \ldots$
-
 我们可以给所有递归可枚举集编号。记 $W_e$ 为第 $e$ 个程序的定义域：
 
 $$
 W_e=\lbrace x:\varphi_e(x)\downarrow\rbrace.
 $$
 
-对于任何递归可枚举集 $W_e$，定义可计算函数
+接下来我们引入几个重要的符号。用 $\varphi_{e,s}(x)\downarrow$ 表示第 $e$ 个程序在输入 $x$ 上在 **$s$ 步之内**停机。对于任何递归可枚举集 $W_e$，定义可计算函数
 
 $$
 f_e(x,s)=\begin{cases}
@@ -699,9 +686,15 @@ f_e(x,s)=\begin{cases}
 \end{cases}
 $$
 
-则有 $\chi_{W_e}(x)=\lim_{s\to\infty} f_e(x,s)$。若定义 $W_{e,s}=\lbrace x:f_e(x,s)=1\rbrace$ 则有 $W_e=\bigcup_{s=0}^\infty W_{e,s}$ 且 $W_{e,0}\subset W_{e,1}\subset W_{e,2}\subset \ldots$
+则有 $\chi_{W_e}(x)=\lim_{s\to\infty} f_e(x,s)$。再定义 $W_{e,s}=\lbrace x:f_e(x,s)=1\rbrace$ 则有 $W_e=\bigcup_{s=0}^\infty W_{e,s}$ 且 $W_{e,0}\subset W_{e,1}\subset W_{e,2}\subset \ldots$
 
-如果一个集合 $A$ 和它的补集 $A^c$ 都是递归可枚举的，那么 $A$ 就是可计算的：对于任意 $x$，交替枚举 $A$ 和 $A^c$ 直到一方出现 $x$，就可以判定 $x$ 是否在 $A$ 中。
+**这里的重点是，$\varphi_{e,s}(x)\downarrow, f_e, W_e$ 都是可计算的谓词、函数或集合。之后我们会经常使用它们进行可计算的构造。**
+
+一个集合是非空递归可枚举集，当且仅当它是某个可计算全函数的值域。这也是“递归可枚举”的含义。_TODO_
+
+我们之前提过的停机问题 $H=\lbrace\langle i,x\rangle:\varphi_i(x)\downarrow\rbrace$ 尽管不可判定，但它是一个递归可枚举集合，因为凡是停机的“程序-输入”对都可以在有限时间内枚举出来。
+
+如果一个集合 $A$ 和它的补集 $A^c$ 都是递归可枚举的，那么 $A$ 就是可计算的：对于任意 $x$，交替枚举 $A$ 和 $A^c$ 直到一方出现 $x$，就可以判定 $x$ 是否在 $A$ 中。因此，停机问题的补集不是递归可枚举的。
 
 ## 10. 程序分析的局限（2）：Rice-Shapiro 定理
 
@@ -842,7 +835,7 @@ $$
 \end{cases}
 $$
 
-如果 $\chi_A=\varphi_e$，我们就称 $e$ 是 $A$ 的一个 $\Delta_0$ 编号。与 $\Sigma_1$ 编号不同，$`\Delta_0`$ 编号所对应的程序必须在所有输入上都有定义。这些概念与**算术层级 (arithmetical hierarchy)** 有关。
+如果 $\chi_A=\varphi_e$，我们就称 $e$ 是 $A$ 的一个 $\Delta_0$ 编号。与 $\Sigma_1$ 编号不同，$`\Delta_0`$ 编号所对应的程序必须在所有输入上都有定义。这些概念与**算术层级 (arithmetical hierarchy)** 有关，它是一种利用量词交替数来给集合分类的方式。本文不会展开讲算术层级。
 
 一个可计算集合既有 $\Sigma_1$ 编号，也有 $\Delta_0$ 编号，而显然 $\Delta_0$ 编号更有用，因为它能在有限时间内给出元素**不在**集合中的结论。那么，是否存在一个可计算偏函数 $f$，使得对于任意 $x$，只要 $W_x$ 是可计算集合，就有
 
@@ -902,6 +895,8 @@ $$
 $$
 
 其中，$`\Phi_e^B`$ 表示程序 $e$ 在拥有谕示 $B$ 时所计算的函数。注意，如果将 $B$ 换为其它的集合 $C$，则 $\Phi_e^C(x)$ 对应的计算就不一定对所有 $x$ 停机了。那些对于所有谕示集都处处停机的程序被称为**真值表归约 (truth-table reduction)**，我们在此不展开。
+
+互相可图灵归约的集合称为**图灵等价 (Turing equivalent)**，一个集合 $A$ 及其所有图灵等价集合组成的“集合的集合”称为 $A$ 所在的**图灵度 (Turing degree)**。本文不会展开讲图灵度理论。
 
 图灵归约的一个重要性质，是对于任何输入 $x$，$`\Phi_e^B(x)`$ 对应的计算只访问 $B$ 的有限个点。如果进一步限制 $e$ 本身的执行步数，我们会见到这样的记号 $\Phi_{e,s}^{B,u}(x)\downarrow$，它表示程序 $e$ 在以 $B$ 为谕示的情况下，在输入 $x$ 上在 $s$ 步内停机，并且整个过程只向 $B$ 查询 $\le u$ 的数字。
 
