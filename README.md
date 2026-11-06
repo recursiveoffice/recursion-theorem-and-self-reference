@@ -697,9 +697,9 @@ X\upharpoonright n
 =X\cap\lbrace i:i\le n\rbrace.
 $$
 
-这样 $`W_{e,s}\upharpoonright s`$ 就是一个可计算的有限集。
+这样 $`W_{e,s}\upharpoonright s`$ 就是一个有限集。
 
-一个集合是非空递归可枚举集，当且仅当它是某个可计算全函数的值域。这也是“递归可枚举”的含义。_TODO_
+一个集合是非空递归可枚举集，当且仅当它是某个可计算全函数的值域，这也是“递归可枚举”的含义：设 $A=W_e\ne\emptyset$，任取 $a\in W_e$ 并定义 $f(\langle x,s\rangle)=\begin{cases}x,\text{ if }x\in (W_{e,s+1}\upharpoonright s+1) - (W_{e,s}\upharpoonright s)\\a,\text{ otherwise}\end{cases}$ 则有 $A=\mathsf{range}(f)$；反过来若存在可计算函数 $\varphi_i$ 使得 $A=\mathsf{range}(\varphi_i)$，则可定义 $\varphi_e(x)=\begin{cases}1,\text{ if }\exists s,t,\varphi_{i,s}(t)\downarrow =x\\ \uparrow,\text{ otherwise}\end{cases}$，于是有 $A=W_e$。
 
 我们之前提过的停机问题 $H=\lbrace\langle i,x\rangle:\varphi_i(x)\downarrow\rbrace$ 尽管不可判定，但它是一个递归可枚举集合，因为凡是停机的“程序-输入”对都可以在有限时间内枚举出来。
 
