@@ -16,7 +16,7 @@
 
 本书由 ChatGPT 协助整理，最终由作者（数学学士、计算机科学博士）校对. 书中内容仅代表作者个人观点，不代表任何机构或团体的立场，亦未接受任何资助. 欢迎各方人士通过提交 PR 参与改进. 转载请注明出处. 
 
-_TODO_ 提一点前沿研究 (比如 precomplete numbering、Arslanov 完备性准则的延伸、Rice 定理在 Blum 复杂性理论上的延伸等等)
+_TODO_ 文中多提及一点前沿研究 (比如 precomplete numbering、Arslanov 完备性准则的延伸、Visser's ADN 定理及其延伸、递归定理在 Blum 复杂性理论上的延伸等等)，不必展开
 
 ## 目录
 
