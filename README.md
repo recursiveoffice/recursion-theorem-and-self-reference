@@ -1021,7 +1021,7 @@ $$
 
 $$
 f(x,s)=\begin{cases}
-y,\text{ if }\Phi_{e,s}^{K_s}\downarrow =y\\
+y,\text{ if }\Phi_{e,s}^{K_s}(x)\downarrow =y\\
 0,\text{ otherwise}
 \end{cases}.
 $$
