@@ -687,6 +687,7 @@ $$
 
 
 _习题 2.2._ 若集合 $A$ 的补集 $A^c$ 为 c.e. 集，则称 $A$ 为 co-c.e. 集. 证明：若 $A, B$ 都是 co-c.e. 集且 $A\cap B=\emptyset$，则存在可计算集合 $C$ 使得 $A\subseteq C \wedge B\subseteq C^c$.
+
 _习题 2.3._ 证明无限的递归可枚举集存在无限的可计算子集.
 
 ### 程序分析的局限（2）：Rice-Shapiro 定理
@@ -914,6 +915,7 @@ $$
 另一种常见的归约是**多一归约 (many-one reduction)**：给定集合 $A$ 和集合 $B$，如果存在一个全可计算函数 $f$ 满足 $\forall x, x\in A\Leftrightarrow f(x)\in B$，则称 $f$ 是一个由 $A$ 到 $B$ 的多一归约，此时两个集合的关系记作 $A\le_m B$. 换句话说，多一归约只允许向谕示查询一次，且查询的结果必须作为最终答案.
 
 _习题 3.1._ 证明停机问题不能多一归约到它的补集.
+
 _习题 3.2._ 给定集合 $A$，定义 $A^\prime=\lbrace x:\Phi_x^A(x)\downarrow\rbrace$ 为 $A$ 的**图灵跳跃 (Turing jump)**. 证明：(1) $A^\prime\not\le_T A$ (2) $A\le_T B\Rightarrow A^\prime\le_m B^\prime$.
 
 ### 极限可计算集、极限引理、收敛模引理
